@@ -1,0 +1,14 @@
+-- CALCULATE SAVINGS --
+1. total income								DONE
+2. total expense							DONE
+3. net balance = income - expense					DONE
+4. start month and end month						DONE
+5. print generate report window table in GUI instead of CLI		DONE
+6. drop down menu for selecting months should come in the center	DONE
+
+-- EXPENSE BREAKDOWN --
+expense breakdown: start month and end month				DONE
+- electricity								DONE
+- bills 								DONE
+- etc. 									DONE
+total expense (electricity)						DONE
