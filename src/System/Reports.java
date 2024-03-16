@@ -54,7 +54,6 @@ public class Reports {
             public void actionPerformed(ActionEvent e) {
 
                 // Add action to generate Income vs. Expense report
-                JOptionPane.showMessageDialog(reportsFrame, "Generating Income vs. Expense Report...");
                 Savings.savings();
             }
         });
@@ -64,7 +63,6 @@ public class Reports {
             public void actionPerformed(ActionEvent e) {
 
                 // Add action to generate Expense Breakdown report
-                JOptionPane.showMessageDialog(reportsFrame, "Generating Expense Breakdown Report...");
                 ExpenseBreakdown.expenseBreakdown();
             }
         });

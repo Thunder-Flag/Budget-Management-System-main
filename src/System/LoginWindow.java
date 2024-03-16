@@ -77,9 +77,9 @@ public class LoginWindow {
         if (username.equals("manshay") && password.equals("123")) {
             try {
                 connection = DriverManager.getConnection(
-                        "jdbc:oracle:thin:@localhost:1521:XE",
-                        "c##harsh",
-                        "123"
+                        "jdbc:oracle:thin:@localhost:1521:orcl",
+                        "c##mb",
+                        "sql"
                 );
                 return true;
             } catch (Exception e) {
@@ -91,8 +91,8 @@ public class LoginWindow {
             try {
                 connection = DriverManager.getConnection(
                         "jdbc:oracle:thin:@localhost:1521:XE",
-                        "c##harsh",
-                        "123"
+                        "c##mb",
+                        "sql"
                 );
                 return true;
             } catch (Exception e) {
@@ -103,8 +103,8 @@ public class LoginWindow {
             try {
                 connection = DriverManager.getConnection(
                         "jdbc:oracle:thin:@localhost:1521:XE",
-                        "c##harsh",
-                        "123"
+                        "c##mb",
+                        "sql"
                 );
                 return true;
             } catch (Exception e) {
