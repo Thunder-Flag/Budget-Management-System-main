@@ -1,4 +1,4 @@
-package System;
+package Management;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,6 +19,7 @@ public class ExpenseBreakdown {
         // Create a new JFrame for the expense breakdown
         JFrame frame = new JFrame("Expense Breakdown");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
 
         JPanel panel = new JPanel(new BorderLayout(10, 10));
         frame.add(panel);
@@ -77,10 +78,6 @@ public class ExpenseBreakdown {
         panel.add(generateButton, BorderLayout.SOUTH);
 
         populateExpenseSourceDropdown(expenseSourceDropdown);
-
-        // Center the frame on the screen
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);
 
         frame.pack();
         frame.setVisible(true);

@@ -1,4 +1,4 @@
-package System;
+package Management;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -51,7 +51,6 @@ public class LoginWindow {
                 String password = new String(passwordField.getPassword());
                 boolean authenticated = authenticate(username, password);
                 if (authenticated) {
-                    JOptionPane.showMessageDialog(loginFrame, "Login successful!");
                     loginFrame.dispose(); // Close the login window
                     MainMenu.showMainMenu();
                 } else {
@@ -76,7 +75,7 @@ public class LoginWindow {
     private static boolean authenticate(String username, String password) {
         try {
             // Establish database connection
-            Connection connection = DriverManager.getConnection(
+            connection = DriverManager.getConnection(
                     "jdbc:oracle:thin:@localhost:1521:orcl", "c##mb", "sql");
 
             // Create a PreparedStatement to query the database for the provided username and password
@@ -93,7 +92,6 @@ public class LoginWindow {
                 // Close the ResultSet, PreparedStatement, and database connection
                 resultSet.close();
                 preparedStatement.close();
-                connection.close();
                 return true; // Username and password match, authentication successful
             } else {
                 // Close the ResultSet, PreparedStatement, and database connection

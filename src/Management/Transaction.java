@@ -1,7 +1,8 @@
-package System;
+package Management;
 import javax.swing.*;
 import java.sql.*;
-import static System.LoginWindow.connection;
+
+import static Management.LoginWindow.connection;
 
 public class Transaction {
     private static JFrame loginFrame;

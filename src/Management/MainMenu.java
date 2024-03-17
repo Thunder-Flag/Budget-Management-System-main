@@ -1,4 +1,4 @@
-package System;
+package Management;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -49,7 +49,7 @@ public class MainMenu {
         addIncomeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String month = JOptionPane.showInputDialog(menuFrame, "Enter transaction month (e.g., Jan):");
+                String month = JOptionPane.showInputDialog(menuFrame, "Enter transaction month (e.g., January):");
                 if (month != null) {
                     String source = JOptionPane.showInputDialog(menuFrame, "Enter income source:");
                     if (source != null) {
@@ -68,7 +68,7 @@ public class MainMenu {
         addExpenseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String month = JOptionPane.showInputDialog(menuFrame, "Enter transaction month (e.g., Jan):");
+                String month = JOptionPane.showInputDialog(menuFrame, "Enter transaction month (e.g., January):");
                 if (month != null) {
                     String source = JOptionPane.showInputDialog(menuFrame, "Enter expense source:");
                     if (source != null) {

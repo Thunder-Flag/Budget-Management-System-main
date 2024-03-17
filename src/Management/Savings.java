@@ -1,4 +1,4 @@
-package System;
+package Management;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +15,7 @@ public class Savings {
 
     public static void savings() {
         // Create a new JFrame for the report generation
-        JFrame frame = new JFrame("Generate Report");
+        JFrame frame = new JFrame("Calculate Savings");
         frame.setSize(500, 300);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(new BorderLayout());
