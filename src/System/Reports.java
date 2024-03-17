@@ -26,7 +26,7 @@ public class Reports {
         JButton trendsAnalysisButton = new JButton("Trends Analysis");
         JButton generateReportButton = new JButton("Generate All Reports");
 
-        Font buttonFont = new Font("Cambria", Font.BOLD, 16); // Adjust the font size as needed
+        Font buttonFont = new Font("Cambria", Font.BOLD, 18); // Adjust the font size as needed
         incomeExpenseButton.setFont(buttonFont);
         expenseBreakdownButton.setFont(buttonFont);
         trendsAnalysisButton.setFont(buttonFont);

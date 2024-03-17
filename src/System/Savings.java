@@ -16,24 +16,29 @@ public class Savings {
     public static void savings() {
         // Create a new JFrame for the report generation
         JFrame frame = new JFrame("Generate Report");
+        frame.setSize(500, 300);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+        frame.setLocationRelativeTo(null);
 
         JPanel panel = new JPanel(new BorderLayout(10, 10));
         frame.add(panel);
 
         JLabel startMonthLabel = new JLabel("Start Month:");
-        panel.add(startMonthLabel, BorderLayout.WEST);
-
+        startMonthLabel.setFont(new Font("Georgia", Font.PLAIN, 16));
         JLabel endMonthLabel = new JLabel("End Month:");
-        panel.add(endMonthLabel, BorderLayout.EAST);
+        endMonthLabel.setFont(new Font("Georgia", Font.PLAIN, 16));
 
         String[] months = {"January", "February", "March", "April", "May", "June",
                 "July", "August", "September", "October", "November", "December"};
 
         JComboBox<String> startMonthDropdown = new JComboBox<>(months);
+        startMonthDropdown.setFont(new Font("Georgia",Font.PLAIN,14));
         JComboBox<String> endMonthDropdown = new JComboBox<>(months);
+        endMonthDropdown.setFont(new Font("Georgia",Font.PLAIN,14));
 
         JPanel dropdownPanel = new JPanel(new GridLayout(2, 2, 10, 10));
+        dropdownPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 0, 10)); // Add padding
         dropdownPanel.add(startMonthLabel);
         dropdownPanel.add(startMonthDropdown);
         dropdownPanel.add(endMonthLabel);
@@ -43,11 +48,14 @@ public class Savings {
 
         JTextArea resultTextArea = new JTextArea();
         resultTextArea.setEditable(false);
-        resultTextArea.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+        resultTextArea.setFont(new Font("Georgia", Font.PLAIN, 16));
         JScrollPane scrollPane = new JScrollPane(resultTextArea);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Add padding
         panel.add(scrollPane, BorderLayout.CENTER);
 
         JButton generateButton = new JButton("Generate");
+        generateButton.setPreferredSize(new Dimension(150, 50)); // Set preferred size
+        generateButton.setFont(new Font("Georgia",Font.BOLD,18));
         generateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -55,17 +63,19 @@ public class Savings {
                 String endMonth = (String) endMonthDropdown.getSelectedItem();
                 displaySavings(startMonth, endMonth, resultTextArea);
 
-                // Adjust frame size based on text area contents
-                frame.pack();
+                // Center the frame on the screen after generating report
+                frame.setLocationRelativeTo(null);
             }
         });
-        panel.add(generateButton, BorderLayout.SOUTH);
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS)); // Set BoxLayout
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0)); // Add padding
+        buttonPanel.add(Box.createHorizontalGlue()); // Add space before button
+        buttonPanel.add(generateButton);
+        buttonPanel.add(Box.createHorizontalGlue()); // Add space after button
+        panel.add(buttonPanel, BorderLayout.SOUTH);
 
-        // Center the frame on the screen
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
-
-        frame.pack();
+         // Set the initial size of the frame
         frame.setVisible(true);
     }
 
