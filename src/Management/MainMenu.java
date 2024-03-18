@@ -51,18 +51,23 @@ public class MainMenu {
             public void actionPerformed(ActionEvent e) {
                 String month = JOptionPane.showInputDialog(menuFrame, "Enter transaction month (e.g., January):");
                 if (month != null) {
-                    String source = JOptionPane.showInputDialog(menuFrame, "Enter income source:");
-                    if (source != null) {
-                        try {
-                            double amount = Double.parseDouble(JOptionPane.showInputDialog(menuFrame, "Enter income amount:"));
-                            Transaction.addTransaction("income", source, amount, month);
-                        } catch (NumberFormatException ex) {
-                            JOptionPane.showMessageDialog(menuFrame, "Invalid amount. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+                    String yearInput = JOptionPane.showInputDialog(menuFrame, "Enter transaction year (e.g., 2000):");
+                    if (yearInput != null) {
+                        String source = JOptionPane.showInputDialog(menuFrame, "Enter income source:");
+                        if (source != null) {
+                            try {
+                                int year = Integer.parseInt(yearInput);
+                                double amount = Double.parseDouble(JOptionPane.showInputDialog(menuFrame, "Enter income amount:"));
+                                Transaction.addTransaction("income", source, amount, month, year);
+                            } catch (NumberFormatException ex) {
+                                JOptionPane.showMessageDialog(menuFrame, "Invalid input. Please enter valid values.", "Error", JOptionPane.ERROR_MESSAGE);
+                            }
                         }
                     }
                 }
             }
         });
+
 
 
         addExpenseButton.addActionListener(new ActionListener() {
@@ -70,18 +75,23 @@ public class MainMenu {
             public void actionPerformed(ActionEvent e) {
                 String month = JOptionPane.showInputDialog(menuFrame, "Enter transaction month (e.g., January):");
                 if (month != null) {
-                    String source = JOptionPane.showInputDialog(menuFrame, "Enter expense source:");
-                    if (source != null) {
-                        try {
-                            double amount = Double.parseDouble(JOptionPane.showInputDialog(menuFrame, "Enter expense amount:"));
-                            Transaction.addTransaction("expense", source, amount, month);
-                        } catch (NumberFormatException ex) {
-                            JOptionPane.showMessageDialog(menuFrame, "Invalid amount. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+                    String yearInput = JOptionPane.showInputDialog(menuFrame, "Enter transaction year (e.g., 2024):");
+                    if (yearInput != null) {
+                        int year = Integer.parseInt(yearInput);
+                        String source = JOptionPane.showInputDialog(menuFrame, "Enter expense source:");
+                        if (source != null) {
+                            try {
+                                double amount = Double.parseDouble(JOptionPane.showInputDialog(menuFrame, "Enter expense amount:"));
+                                Transaction.addTransaction("expense", source, amount, month, year);
+                            } catch (NumberFormatException ex) {
+                                JOptionPane.showMessageDialog(menuFrame, "Invalid amount. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+                            }
                         }
                     }
                 }
             }
         });
+
 
         generateReportsButton.addActionListener(new ActionListener() {
             @Override

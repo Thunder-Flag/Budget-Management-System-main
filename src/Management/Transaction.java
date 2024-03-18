@@ -6,9 +6,9 @@ import static Management.LoginWindow.connection;
 
 public class Transaction {
     private static JFrame loginFrame;
-    public static void addTransaction(String type, String source, double amount, String month) {
+    public static void addTransaction(String type, String source, double amount, String month, int year) {
         try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO budget (inc_src, inc_amt, exp_src, exp_amt, month) VALUES (?, ?, ?, ?, ?)");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO budget (inc_src, inc_amt, exp_src, exp_amt, month, year) VALUES (?, ?, ?, ?, ?, ?)");
             if (type.equals("income")) {
                 statement.setString(1, source);
                 statement.setDouble(2, amount);
@@ -21,6 +21,7 @@ public class Transaction {
                 statement.setDouble(4, amount);
             }
             statement.setString(5, month);
+            statement.setInt(6, year);
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
                 JOptionPane.showMessageDialog(loginFrame, "Transaction added successfully!");
@@ -29,4 +30,5 @@ public class Transaction {
             ex.printStackTrace();
         }
     }
+
 }
