@@ -1,4 +1,4 @@
-package System;
+package Management;
 import javax.swing.*;
 
 public class ManagementSystem {

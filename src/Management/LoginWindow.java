@@ -1,14 +1,13 @@
-package System;
+package Management;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 public class LoginWindow {
-    private static JFrame loginFrame;
     public static Connection connection;
+
     public static void open() {
         JFrame loginFrame = new JFrame("Login to your account");
-        loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.setSize(460, 250);
         loginFrame.setLocationRelativeTo(null);
         loginFrame.setLayout(new BorderLayout());
@@ -38,7 +37,7 @@ public class LoginWindow {
         loginButton.setPreferredSize(new Dimension(100, 30));
         loginButton.setFocusPainted(false);
 
-        Font lfont = new Font("Georgia",Font.BOLD,18);
+        Font lfont = new Font("Georgia", Font.BOLD, 18);
         usernameLabel.setFont(lfont);
         passwordLabel.setFont(lfont);
         usernameField.setFont(lfont);
@@ -52,7 +51,6 @@ public class LoginWindow {
                 String password = new String(passwordField.getPassword());
                 boolean authenticated = authenticate(username, password);
                 if (authenticated) {
-                    JOptionPane.showMessageDialog(loginFrame, "Login successful!");
                     loginFrame.dispose(); // Close the login window
                     MainMenu.showMainMenu();
                 } else {
@@ -73,46 +71,39 @@ public class LoginWindow {
 
         loginFrame.setVisible(true);
     }
+
     private static boolean authenticate(String username, String password) {
-        if (username.equals("manshay") && password.equals("123")) {
-            try {
-                connection = DriverManager.getConnection(
-                        "jdbc:oracle:thin:@localhost:1521:orcl",
-                        "c##mb",
-                        "sql"
-                );
-                return true;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        else if (username.equals("harsh") && password.equals("456")) {
+        try {
+            // Establish database connection
+            connection = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@localhost:1521:orcl", "c##mb", "sql");
 
-            try {
-                connection = DriverManager.getConnection(
-                        "jdbc:oracle:thin:@localhost:1521:XE",
-                        "c##mb",
-                        "sql"
-                );
-                return true;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        else if (username.equals("krish") && password.equals("789")) {
-            try {
-                connection = DriverManager.getConnection(
-                        "jdbc:oracle:thin:@localhost:1521:XE",
-                        "c##mb",
-                        "sql"
-                );
-                return true;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            // Create a PreparedStatement to query the database for the provided username and password
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "SELECT * FROM user_accounts WHERE username = ? AND password = ?");
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
 
+            // Execute the query
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // Check if the query returned any rows
+            if (resultSet.next()) {
+                // Close the ResultSet, PreparedStatement, and database connection
+                resultSet.close();
+                preparedStatement.close();
+                return true; // Username and password match, authentication successful
+            } else {
+                // Close the ResultSet, PreparedStatement, and database connection
+                resultSet.close();
+                preparedStatement.close();
+                connection.close();
+                return false; // Username and/or password do not match
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // Error occurred during authentication
         }
-        return false;
     }
 }
 

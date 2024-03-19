@@ -1,7 +1,7 @@
-package System;
+package Management;
 import java.sql.*;
 
-import static System.LoginWindow.connection;
+import static Management.LoginWindow.connection;
 public class Logout {
     public static void logout() {
         if (connection != null) {
