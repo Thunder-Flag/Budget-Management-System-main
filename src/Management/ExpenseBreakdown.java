@@ -19,6 +19,7 @@ public class ExpenseBreakdown {
         // Create a new JFrame for the expense breakdown
         JFrame frame = new JFrame("Expense Breakdown");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(460,450);
         frame.setLocationRelativeTo(null);
 
         JPanel panel = new JPanel(new BorderLayout(10, 10));
@@ -28,39 +29,62 @@ public class ExpenseBreakdown {
         inputPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         JLabel startMonthLabel = new JLabel("Start Month:");
+        startMonthLabel.setFont(new Font("Georgia",Font.PLAIN,16));
         JComboBox<String> startMonthDropdown = new JComboBox<>(getMonthsArray());
+        startMonthDropdown.setFont(new Font("Georgia",Font.PLAIN,16));
 
         JLabel endMonthLabel = new JLabel("End Month:");
+        endMonthLabel.setFont(new Font("Georgia",Font.PLAIN,16));
         JComboBox<String> endMonthDropdown = new JComboBox<>(getMonthsArray());
+        endMonthDropdown.setFont(new Font("Georgia",Font.PLAIN,16));
+
+        JLabel yearLabel = new JLabel("Year:");
+        yearLabel.setFont(new Font("Georgia", Font.PLAIN, 16));
+        JComboBox<Integer> yearDropdown = new JComboBox<>();
+        for (int year = 2000; year <= 2100; year++) {
+            yearDropdown.addItem(year);
+        }
+        yearDropdown.setFont(new Font("Georgia", Font.PLAIN, 16));
 
         JLabel expenseSourceLabel = new JLabel("Expense Source:");
+        expenseSourceLabel.setFont(new Font("Georgia",Font.PLAIN,16));
         JComboBox<String> expenseSourceDropdown = new JComboBox<>();
+        expenseSourceDropdown.setFont(new Font("Georgia",Font.PLAIN,16));
         JTextField customExpenseSourceField = new JTextField();
+        customExpenseSourceField.setFont(new Font("Georgia",Font.PLAIN,16));
         customExpenseSourceField.setMaximumSize(new Dimension(200, 25));
+
+        JLabel customexpense = new JLabel("Custom Expense Source:");
+        customexpense.setFont(new Font("Georgia",Font.PLAIN,16));
 
         inputPanel.add(startMonthLabel);
         inputPanel.add(startMonthDropdown);
         inputPanel.add(endMonthLabel);
         inputPanel.add(endMonthDropdown);
+        inputPanel.add(yearLabel);
+        inputPanel.add(yearDropdown);
         inputPanel.add(expenseSourceLabel);
         inputPanel.add(expenseSourceDropdown);
-        inputPanel.add(new JLabel("Custom Expense Source:"));
+        inputPanel.add(customexpense);
         inputPanel.add(customExpenseSourceField);
 
         panel.add(inputPanel, BorderLayout.NORTH);
 
         JTextArea resultTextArea = new JTextArea();
         resultTextArea.setEditable(false);
-        resultTextArea.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+        resultTextArea.setFont(new Font("Georgia", Font.PLAIN, 16));
         JScrollPane scrollPane = new JScrollPane(resultTextArea);
         panel.add(scrollPane, BorderLayout.CENTER);
 
         JButton generateButton = new JButton("Generate");
+        generateButton.setPreferredSize(new Dimension(150, 50));
+        generateButton.setFont(new Font("Georgia",Font.BOLD,18));
         generateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String startMonth = (String) startMonthDropdown.getSelectedItem();
                 String endMonth = (String) endMonthDropdown.getSelectedItem();
+                int year = (int) yearDropdown.getSelectedItem();
                 String expenseSource;
 
                 if (!customExpenseSourceField.getText().isEmpty()) {
@@ -70,16 +94,20 @@ public class ExpenseBreakdown {
                     expenseSource = (String) expenseSourceDropdown.getSelectedItem();
                 }
 
-                displayExpenseBreakdown(startMonth, endMonth, expenseSource, resultTextArea);
+                displayExpenseBreakdown(startMonth, endMonth, year, expenseSource, resultTextArea);
 
-                frame.pack();
             }
         });
-        panel.add(generateButton, BorderLayout.SOUTH);
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS)); // Set BoxLayout
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0)); // Add padding
+        buttonPanel.add(Box.createHorizontalGlue()); // Add space before button
+        buttonPanel.add(generateButton);
+        buttonPanel.add(Box.createHorizontalGlue()); // Add space after button
+        frame.add(buttonPanel, BorderLayout.SOUTH);
 
         populateExpenseSourceDropdown(expenseSourceDropdown);
 
-        frame.pack();
         frame.setVisible(true);
     }
 
@@ -114,7 +142,7 @@ public class ExpenseBreakdown {
         }
     }
 
-    private static void displayExpenseBreakdown(String startMonth, String endMonth, String expenseSource, JTextArea resultTextArea) {
+    private static void displayExpenseBreakdown(String startMonth, String endMonth, int year, String expenseSource, JTextArea resultTextArea) {
         try {
             Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
 
@@ -123,11 +151,12 @@ public class ExpenseBreakdown {
 
             String query = "SELECT SUM(EXP_AMT) AS TOTAL_EXPENSE FROM BUDGET " +
                     "WHERE TO_CHAR(TO_DATE(MONTH, 'Month'), 'MM') BETWEEN ? AND ? " +
-                    "AND EXP_SRC = ?";
+                    "AND YEAR = ? AND EXP_SRC = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, startMonthNum);
             statement.setString(2, endMonthNum);
-            statement.setString(3, expenseSource);
+            statement.setInt(3, year);
+            statement.setString(4, expenseSource);
             ResultSet result = statement.executeQuery();
 
             String resultText = "Expense Breakdown for " + expenseSource +
