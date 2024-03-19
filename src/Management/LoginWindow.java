@@ -1,4 +1,4 @@
-package System;
+package Management;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -77,9 +77,9 @@ public class LoginWindow {
         if (username.equals("manshay") && password.equals("123")) {
             try {
                 connection = DriverManager.getConnection(
-                        "jdbc:oracle:thin:@localhost:1521:orcl",
-                        "c##mb",
-                        "sql"
+                        "jdbc:oracle:thin:@localhost:1521:XE",
+                        "c##harsh",
+                        "123"
                 );
                 return true;
             } catch (Exception e) {
@@ -91,8 +91,8 @@ public class LoginWindow {
             try {
                 connection = DriverManager.getConnection(
                         "jdbc:oracle:thin:@localhost:1521:XE",
-                        "c##mb",
-                        "sql"
+                        "c##harsh",
+                        "123"
                 );
                 return true;
             } catch (Exception e) {
@@ -103,8 +103,8 @@ public class LoginWindow {
             try {
                 connection = DriverManager.getConnection(
                         "jdbc:oracle:thin:@localhost:1521:XE",
-                        "c##mb",
-                        "sql"
+                        "c##harsh",
+                        "123"
                 );
                 return true;
             } catch (Exception e) {
