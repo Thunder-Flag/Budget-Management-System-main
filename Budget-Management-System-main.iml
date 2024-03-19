@@ -10,7 +10,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../oraclexe/app/oracle/product/11.2.0/server/jdbc/lib/ojdbc6.jar!/" />
+          <root url="jar://C:/Oracle/db_home/jdbc/lib/ojdbc8.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

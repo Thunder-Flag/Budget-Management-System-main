@@ -1,4 +1,4 @@
-package System;
+package Management;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -32,7 +32,9 @@ public class MainFrame {
         createAccountButton.setBounds(50, 200, 200, 50);
         createAccountButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {}
+            public void actionPerformed(ActionEvent e) {
+                Account.account();
+            }
         });
 
         JButton loginButton = new JButton("Login");
