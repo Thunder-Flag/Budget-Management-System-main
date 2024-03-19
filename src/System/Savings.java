@@ -9,9 +9,9 @@ import java.sql.*;
 public class Savings {
 
     // JDBC URL, username, and password of the Oracle database
-    private static final String JDBC_URL = "jdbc:oracle:thin:@localhost:1521:orcl";
-    private static final String USERNAME = "c##mb";
-    private static final String PASSWORD = "sql";
+    private static final String JDBC_URL = "jdbc:oracle:thin:@localhost:1521:XE";
+    private static final String USERNAME = "c##harsh";
+    private static final String PASSWORD = "123";
 
     public static void savings() {
         // Create a new JFrame for the report generation
