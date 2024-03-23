@@ -33,7 +33,7 @@ public class Savings {
         String[] months = {"January", "February", "March", "April", "May", "June",
                 "July", "August", "September", "October", "November", "December"};
         JComboBox<String> startMonthDropdown = new JComboBox<>(months);
-        startMonthDropdown.setFont(new Font("Georgia", Font.PLAIN, 14));
+        startMonthDropdown.setFont(new Font("Georgia", Font.PLAIN, 16));
         startMonthPanel.add(startMonthDropdown);
         panel.add(startMonthPanel);
 
@@ -45,7 +45,7 @@ public class Savings {
         endMonthPanel.add(endMonthLabel);
         // Add end month dropdown
         JComboBox<String> endMonthDropdown = new JComboBox<>(months);
-        endMonthDropdown.setFont(new Font("Georgia", Font.PLAIN, 14));
+        endMonthDropdown.setFont(new Font("Georgia", Font.PLAIN, 16));
         endMonthPanel.add(endMonthDropdown);
         panel.add(endMonthPanel);
 
@@ -60,7 +60,7 @@ public class Savings {
         for (int year = 2000; year <= 2100; year++) {
             yearDropdown.addItem(year);
         }
-        yearDropdown.setFont(new Font("Georgia", Font.PLAIN, 14));
+        yearDropdown.setFont(new Font("Georgia", Font.PLAIN, 16));
         yearPanel.add(yearDropdown);
         panel.add(yearPanel);
 
