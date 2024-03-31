@@ -23,13 +23,13 @@ public class Reports {
 
         JButton incomeExpenseButton = new JButton("Calculate Savings");
         JButton expenseBreakdownButton = new JButton("Expense Breakdown");
-        JButton trendsAnalysisButton = new JButton("Trends Analysis");
-        JButton generateReportButton = new JButton("Generate All Reports");
+        JButton generateReportButton = new JButton("Income & Expense Report");
+        JButton downloadReportsButton = new JButton("Download Reports");
 
         Font buttonFont = new Font("Cambria", Font.BOLD, 18); // Adjust the font size as needed
         incomeExpenseButton.setFont(buttonFont);
         expenseBreakdownButton.setFont(buttonFont);
-        trendsAnalysisButton.setFont(buttonFont);
+        downloadReportsButton.setFont(buttonFont);
         generateReportButton.setFont(buttonFont);
         incomeExpenseButton.setFocusPainted(false);
 
@@ -38,13 +38,13 @@ public class Reports {
         optionsPanel.add(Box.createRigidArea(new Dimension(0,10)));
         optionsPanel.add(expenseBreakdownButton);
         optionsPanel.add(Box.createRigidArea(new Dimension(0,10)));
-        optionsPanel.add(trendsAnalysisButton);
-        optionsPanel.add(Box.createRigidArea(new Dimension(0,10)));
         optionsPanel.add(generateReportButton);
+        optionsPanel.add(Box.createRigidArea(new Dimension(0,10)));
+        optionsPanel.add(downloadReportsButton);
 
         incomeExpenseButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         expenseBreakdownButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        trendsAnalysisButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        downloadReportsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         generateReportButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         mainPanel.add(optionsPanel, BorderLayout.CENTER);
@@ -52,8 +52,6 @@ public class Reports {
         incomeExpenseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                // Add action to generate Income vs. Expense report
                 Savings.savings();
             }
         });
@@ -66,20 +64,17 @@ public class Reports {
                 ExpenseBreakdown.expenseBreakdown();
             }
         });
-
-        trendsAnalysisButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Add action to generate Trends Analysis report
-                JOptionPane.showMessageDialog(reportsFrame, "Generating Trends Analysis Report...");
-            }
-        });
-
         generateReportButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Add action to generate all selected reports
-                JOptionPane.showMessageDialog(reportsFrame, "Generating All Selected Reports...");
+                    GenerateAllReports.GenerateAllReports();
+            }
+        });
+
+        downloadReportsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
 
