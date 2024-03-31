@@ -6,7 +6,7 @@ import java.awt.event.*;
 import java.sql.*;
 import java.util.Calendar;
 
-public class GenerateAllReports {
+public class IncomeExpenseReport {
 
     // JDBC URL, username, and password of the Oracle database
     private static final String JDBC_URL = "jdbc:oracle:thin:@localhost:1521:orcl";

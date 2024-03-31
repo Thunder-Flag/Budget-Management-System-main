@@ -17,7 +17,6 @@ public class Account {
         Font titleFont = new Font("Georgia", Font.BOLD, 20);
         titleLabel.setFont(titleFont);
         titlePanel.add(titleLabel);
-
         JPanel formPanel = new JPanel(new GridLayout(3, 2, 10, 10));
         formPanel.setBorder(BorderFactory.createEmptyBorder(10, 50, 10, 50));
 

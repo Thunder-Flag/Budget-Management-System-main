@@ -67,7 +67,7 @@ public class Reports {
         generateReportButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                    GenerateAllReports.GenerateAllReports();
+                    IncomeExpenseReport.GenerateAllReports();
             }
         });
 
