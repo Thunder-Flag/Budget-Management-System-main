@@ -52,7 +52,6 @@ public class LoginWindow {
                 String password = new String(passwordField.getPassword());
                 boolean authenticated = authenticate(username, password);
                 if (authenticated) {
-                    JOptionPane.showMessageDialog(loginFrame, "Login successful!");
                     loginFrame.dispose(); // Close the login window
                     MainMenu.showMainMenu();
                 } else {
@@ -74,45 +73,33 @@ public class LoginWindow {
         loginFrame.setVisible(true);
     }
     private static boolean authenticate(String username, String password) {
-        if (username.equals("manshay") && password.equals("123")) {
-            try {
-                connection = DriverManager.getConnection(
-                        "jdbc:oracle:thin:@localhost:1521:XE",
-                        "c##harsh",
-                        "123"
-                );
-                return true;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        else if (username.equals("harsh") && password.equals("456")) {
+        try {
+            // Establish connection to the database
+            connection = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@localhost:1521:orcl",
+                    "c##mb",
+                    "sql"
+            );
 
-            try {
-                connection = DriverManager.getConnection(
-                        "jdbc:oracle:thin:@localhost:1521:XE",
-                        "c##harsh",
-                        "123"
-                );
-                return true;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        else if (username.equals("krish") && password.equals("789")) {
-            try {
-                connection = DriverManager.getConnection(
-                        "jdbc:oracle:thin:@localhost:1521:XE",
-                        "c##harsh",
-                        "123"
-                );
-                return true;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            // Prepare the SQL statement to check the user credentials
+            String sql = "SELECT * FROM user_accounts WHERE username = ? AND password = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, username);
+            statement.setString(2, password);
 
+            // Execute the query
+            ResultSet resultSet = statement.executeQuery();
+
+            // Check if the result set has any rows (i.e., if the user exists)
+            if (resultSet.next()) {
+                return true; // Authentication successful
+            } else {
+                return false; // Authentication failed
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // Authentication failed due to an error
         }
-        return false;
     }
 }
 
