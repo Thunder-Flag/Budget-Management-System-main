@@ -6,7 +6,7 @@ public class Reports {
     public static void openGenerateReportsSection() {
         JFrame reportsFrame = new JFrame("Generate Reports");
         reportsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Dispose frame on close
-        reportsFrame.setSize(450, 300); // Adjust size as needed
+        reportsFrame.setSize(450, 250); // Adjust size as needed
         reportsFrame.setLocationRelativeTo(null);
 
         JPanel mainPanel = new JPanel(new BorderLayout());
@@ -62,7 +62,7 @@ public class Reports {
         downloadReportsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                    ReportDownloader.downloadReports();
             }
         });
 
