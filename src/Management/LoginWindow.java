@@ -75,11 +75,7 @@ public class LoginWindow {
     private static boolean authenticate(String username, String password) {
         try {
             // Establish connection to the database
-            connection = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521:orcl",
-                    "c##mb",
-                    "sql"
-            );
+            connection = DBConnection.connection();
 
             // Prepare the SQL statement to check the user credentials
             String sql = "SELECT * FROM user_accounts WHERE username = ? AND password = ?";

@@ -67,7 +67,7 @@ public class Account {
                 // Insert account details into the database
                 try {
                     // Establish database connection
-                    Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "c##mb", "sql");
+                    Connection connection = DBConnection.connection();
 
                     // Create a PreparedStatement for inserting account details
                     PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO user_accounts (username, password) VALUES (?, ?)");

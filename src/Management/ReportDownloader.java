@@ -14,11 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ReportDownloader {
-
-    private static final String JDBC_URL = "jdbc:oracle:thin:@localhost:1521:orcl";
-    private static final String USERNAME = "c##mb";
-    private static final String PASSWORD = "sql";
-
     public static void downloadReports() {
         // Create a frame for selecting start and end months and year
         JFrame frame = new JFrame("Select Months and Year");
@@ -85,7 +80,7 @@ public class ReportDownloader {
     private static void downloadReports(String startMonth, String endMonth, int year) {
         try {
             // Establishing the database connection
-            Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
+            Connection connection = DBConnection.connection();
 
             Map<String, String> monthMap = new HashMap<>();
             monthMap.put("January", "01");

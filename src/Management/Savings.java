@@ -6,12 +6,6 @@ import java.awt.event.*;
 import java.sql.*;
 
 public class Savings {
-
-    // JDBC URL, username, and password of the Oracle database
-    private static final String JDBC_URL = "jdbc:oracle:thin:@localhost:1521:orcl";
-    private static final String USERNAME = "c##mb";
-    private static final String PASSWORD = "sql";
-
     public static void savings() {
         // Create a new JFrame for the report generation
         JFrame frame = new JFrame("Calculate Savings");
@@ -104,7 +98,7 @@ public class Savings {
     private static void displaySavings(String startMonth, String endMonth, int year, JTextArea resultTextArea) {
         try {
             // Establishing the connection
-            Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
+            Connection connection = DBConnection.connection();
 
             // Query to get the sum of income for the specified period
             String incomeQuery = "SELECT SUM(INC_AMT) AS TOTAL_INCOME FROM BUDGET " +

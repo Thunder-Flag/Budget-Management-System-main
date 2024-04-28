@@ -5,16 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ExpenseBreakdown {
-
-    // JDBC URL, username, and password of the Oracle database
-    private static final String JDBC_URL = "jdbc:oracle:thin:@localhost:1521:orcl";
-    private static final String USERNAME = "c##mb";
-    private static final String PASSWORD = "sql";
-
     public static void expenseBreakdown() {
         // Create a new JFrame for the expense breakdown
         JFrame frame = new JFrame("Expense Breakdown");
@@ -98,7 +90,7 @@ public class ExpenseBreakdown {
 
     private static void populateExpenseSourceDropdown(JComboBox<String> dropdown) {
         try {
-            Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
+            Connection connection = DBConnection.connection();
             String query = "SELECT DISTINCT EXP_SRC FROM BUDGET";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
@@ -119,7 +111,7 @@ public class ExpenseBreakdown {
 
     private static void displayExpenseBreakdown(String selectedMonth, int selectedYear, String selectedExpenseSource, JTextArea resultTextArea) {
         try {
-            Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
+            Connection connection = DBConnection.connection();
 
             String query = "SELECT SUM(EXP_AMT) AS TOTAL_EXPENSE, MONTH, EXP_SRC FROM BUDGET " +
                     "WHERE YEAR = ? ";
