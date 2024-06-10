@@ -17,7 +17,6 @@ public class Account {
         Font titleFont = new Font("Georgia", Font.BOLD, 20);
         titleLabel.setFont(titleFont);
         titlePanel.add(titleLabel);
-
         JPanel formPanel = new JPanel(new GridLayout(3, 2, 10, 10));
         formPanel.setBorder(BorderFactory.createEmptyBorder(10, 50, 10, 50));
 
@@ -68,7 +67,7 @@ public class Account {
                 // Insert account details into the database
                 try {
                     // Establish database connection
-                    Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "c##mb", "sql");
+                    Connection connection = DBConnection.connection();
 
                     // Create a PreparedStatement for inserting account details
                     PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO user_accounts (username, password) VALUES (?, ?)");

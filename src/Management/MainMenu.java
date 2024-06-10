@@ -46,7 +46,7 @@ public class MainMenu {
         generateReportsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         logoutButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        addIncomeButton.addActionListener(new ActionListener() {
+        addIncomeButton.addActionListener( new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String month = JOptionPane.showInputDialog(menuFrame, "Enter transaction month (e.g., January):");
@@ -67,9 +67,6 @@ public class MainMenu {
                 }
             }
         });
-
-
-
         addExpenseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -91,8 +88,6 @@ public class MainMenu {
                 }
             }
         });
-
-
         generateReportsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
